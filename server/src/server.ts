@@ -10,6 +10,7 @@ export const setupServer = () => {
       app.use(express.json());
     app.use("/boards", boardsRouter);
 
+
     app.use((req, res) => res.status(404).json({
         message: `${req.url} not found`
     }))
