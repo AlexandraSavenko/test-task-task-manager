@@ -14,4 +14,6 @@ const boardSchema = new Schema({
         }
     } 
 });
-export const Board = model("Board", boardSchema);
+const BoardsCollection = model("Board", boardSchema);
+
+export default BoardsCollection;

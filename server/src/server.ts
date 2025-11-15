@@ -7,6 +7,7 @@ const port = Number(env('PORT', 3000))
 export const setupServer = () => {
     const app = express();
     app.use(cors());
+      app.use(express.json());
     app.use("/boards", boardsRouter);
 
     app.use((req, res) => res.status(404).json({

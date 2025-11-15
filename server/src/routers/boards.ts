@@ -1,10 +1,15 @@
 import { Router } from "express";
-// import * as boardsServises from "../services/boardServ"
+import { isValidId } from "../middlewares/isValidId";
+import ctrlWrapper from "../utils/ctrlWrapper";
+import * as boardsControllers from "../controllers/boards"
+import validateBody from "../utils/validateBody";
+import { boardAddSchema } from "../validation/boards";
 
 const boardsRouter = Router();
 
-// boardsRouter.get("/:id") => {
+boardsRouter.get("/", ctrlWrapper(boardsControllers.getAllBoardsController))
+boardsRouter.get("/:boardId", isValidId, ctrlWrapper(boardsControllers.getBoardByIdController));
 
-// }
-
+boardsRouter.post("/", validateBody(boardAddSchema), ctrlWrapper(boardsControllers.addBoardController))
+boardsRouter.delete("/:boardId", isValidId, ctrlWrapper(boardsControllers.deleteBoardController))
 export default boardsRouter;
