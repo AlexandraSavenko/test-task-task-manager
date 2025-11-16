@@ -51,7 +51,7 @@ const status = result?.isNew ? 201 : 200;
 
 res.status(status).json({
     status,
-    message: result?.isNew? "Successfully created": "Successfully updated",
+    message: result?.isNew? "Successfully created board": "Successfully updated board",
     data: result?.data
 })
 }
