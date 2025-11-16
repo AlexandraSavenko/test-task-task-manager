@@ -13,6 +13,7 @@ boardsRouter.get("/", ctrlWrapper(boardsControllers.getAllBoardsController))
 boardsRouter.get("/:boardId", isValidId, ctrlWrapper(boardsControllers.getBoardByIdController));
 
 boardsRouter.post("/", validateBody(boardAddSchema), ctrlWrapper(boardsControllers.addBoardController))
+boardsRouter.put("/:boardId", isValidId, validateBody(boardAddSchema), ctrlWrapper(boardsControllers.updateBoardController))
 boardsRouter.delete("/:boardId", isValidId, ctrlWrapper(boardsControllers.deleteBoardController))
 
 boardsRouter.use("/:boardId/tasks", tasksRouter)

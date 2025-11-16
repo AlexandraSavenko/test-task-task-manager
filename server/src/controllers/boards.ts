@@ -37,6 +37,25 @@ export const addBoardController = async (req: Request, res: Response) => {
     })
 }
 
+
+export const updateBoardController = async (req: Request, res: Response) => {
+const { boardId } = req.params;
+console.log("putBoardController", req.params);
+const result = await boardsServises.updateBoard({
+    boardId,
+    payload: req.body,
+    options: {upsert: true}
+});
+
+const status = result?.isNew ? 201 : 200;
+
+res.status(status).json({
+    status,
+    message: result?.isNew? "Successfully created": "Successfully updated",
+    data: result?.data
+})
+}
+
 export const deleteBoardController = async (req: Request, res: Response) => {
 const {boardId} = req.params;
 console.log("deleteBoardController", req.params)
