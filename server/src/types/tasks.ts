@@ -5,6 +5,7 @@ export interface createTaskPayload {
 
 export interface UpdateTaskParams {
     taskId: string;
+    boardId: string;
     payload: createTaskPayload;
     options: {}
 }

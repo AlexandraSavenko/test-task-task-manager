@@ -4,17 +4,22 @@ import { createTaskPayload, UpdateTaskParams } from "../types/tasks";
 export const getTasks = async (boardId: string) =>
   TaskCollection.find({ boardId });
 
-export const addTask = (payload: createTaskPayload) =>
-  TaskCollection.create(payload);
+export const addTask = (payload: createTaskPayload, boardId: string) =>
+  TaskCollection.create({boardId, ...payload});
 
 export const updateTask = async ({
   taskId,
+  boardId,
   payload,
   options = {},
 }: UpdateTaskParams) => {
+    const finalPayload = {
+        boardId,
+        ...payload
+    }
   const rawResult = await TaskCollection.findOneAndUpdate(
     { _id: taskId },
-    { $set: payload },
+    { $set: finalPayload },
     {
       ...options,
       includeResultMetadata: true,

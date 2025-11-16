@@ -15,7 +15,8 @@ export const getTasksController = async (req: Request, res: Response) => {
   });
 };
 export const addTaskController = async (req: Request, res: Response) => {
-  const data = await TasksServises.addTask(req.body);
+    const {boardId} = req.params;
+  const data = await TasksServises.addTask(req.body, boardId);
 
   res.status(201).json({
     status: 201,
@@ -26,9 +27,11 @@ export const addTaskController = async (req: Request, res: Response) => {
 
 export const updateTaskController = async (req: Request, res: Response) => {
   const { taskId } = req.params;
+  const {boardId} = req.params;
   console.log("updataTaskController", req.params);
   const result = await TasksServises.updateTask({
     taskId,
+    boardId,
     payload: req.body,
     options: { upsert: true },
   });
