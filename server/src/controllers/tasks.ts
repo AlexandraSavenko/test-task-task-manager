@@ -1,11 +1,11 @@
 import { Request, Response, NextFunction } from "express";
-import { addTask, getTasks } from "../services/tasks";
+import * as TasksControllers from "../services/tasks";
 
 
 export const getTasksController = async (req: Request, res: Response) => {
     const {boardId} = req.params;
     console.log("getTasksController: req.params -- ", req.params)
-    const data = await getTasks(boardId);
+    const data = await TasksControllers.getTasks(boardId);
     if(!data){
         console.log("something's not right, no data")
     }
@@ -16,7 +16,7 @@ export const getTasksController = async (req: Request, res: Response) => {
     })
 }
 export const addTaskController = async (req: Request, res: Response) => {
-    const data = await addTask(req.body);
+    const data = await TasksControllers.addTask(req.body);
 
     res.status(201).json({
         status: 201,
@@ -26,5 +26,11 @@ export const addTaskController = async (req: Request, res: Response) => {
 }
 
 export const deleteTaskController = async (req: Request, res: Response) => {
-    console.log(req.params)
+    const { taskId } = req.params;
+    console.log("deleteTaskController", req.params)
+    const data = await TasksControllers.deleteTask(taskId)
+    if(!data){
+        console.log("something's not right, no data")
+    }
+    res.status(204).send()
 }

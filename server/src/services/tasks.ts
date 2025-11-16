@@ -4,4 +4,6 @@ import { createTaskPayload } from "../types/tasks";
 
 export const getTasks = async (boardId: string) => TaskCollection.find({boardId});
 
-export const addTask = (payload: createTaskPayload) => TaskCollection.create(payload)
+export const addTask = (payload: createTaskPayload) => TaskCollection.create(payload);
+
+export const deleteTask = (taskId: string) => TaskCollection.findOneAndDelete({_id: taskId})
