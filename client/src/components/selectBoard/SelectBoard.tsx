@@ -9,6 +9,7 @@ const SelectBoard = () => {
   const allBoards = useAppSelector(selectAllBoards);
   useEffect(() => {
     dispatch(getAllBoards())
+    
   }, [])
   const handleChangeBoard = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const boardId = event.target.value;

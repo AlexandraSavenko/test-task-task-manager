@@ -1,13 +1,15 @@
 import { DndContext, type DragEndEvent } from '@dnd-kit/core';
-import type { ColumnType, TaskType } from '../../types/types';
+import type { TaskType } from '../../types/types';
 import css from './Board.module.css'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Column from '../../components/Column/Column';
-const COLUMNS: ColumnType[] = [
-  { id: "column-TODO", title: "To Do" },
-  { id: "column-IN_PROGRESS", title: "In Progress" },
-  { id: "column-DONE", title: "Done" },
-];
+import { useAppSelector } from '../../hooks/redux';
+import { selectTheBoard } from '../../redux/boards/selectors';
+// const COLUMNS: ColumnType[] = [
+//   { id: "column-TODO", title: "To Do" },
+//   { id: "column-IN_PROGRESS", title: "In Progress" },
+//   { id: "column-DONE", title: "Done" },
+// ];
 
 const TASKS: TaskType[] = [
   { id: "task-1", title: "do it now", description: "just do it", status: "TODO" },
@@ -21,8 +23,8 @@ const TASKS: TaskType[] = [
   { id: "task-3", title: "do it", description: "just do it", status: "DONE" },
 ];
 const Board = () => {
+  const boardInfo = useAppSelector(selectTheBoard);
     const [tasks, setTasks] = useState<TaskType[]>(TASKS);
-    console.log(TASKS)
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
     if (!over) return;
@@ -38,13 +40,15 @@ const Board = () => {
       )
     );
   };
+  useEffect(() => {console.log(boardInfo)}, [boardInfo])
+  if(!boardInfo) return <p>Sorry, you need to select a board</p>
   return (
     <div className={css.taskMan}>
       <div className=".outerWrap">
-        <p>hello task manager</p>
+        <p>{boardInfo?.name}</p>
         <div className={css.wrap}>
           <DndContext onDragEnd={handleDragEnd}>
-            {COLUMNS.map((column) => (
+            {boardInfo.columns.map((column) => (
               <Column
                 key={column.id}
                 column={column}

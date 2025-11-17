@@ -9,8 +9,13 @@ export const getAllBoards = createAsyncThunk("boards/getAll", async () => {
 })
 
 export const getTheBoard = createAsyncThunk("boards/getById", async(boardId: string) => {
-    const res = await api.get(`/boards/${boardId}`);
-    return res.data;
+    const board = await api.get(`/boards/${boardId}`);
+    const tasks = await api.get(`/boards/${boardId}/tasks`);
+    const res = {
+        board: board.data.data,
+        tasks: tasks.data.data
+    }
+    return res;
 })
 export const createBoard = createAsyncThunk("boards/createBoard", async (newBoard: BoardType) => {
 const res = await api.post("/boards", newBoard);
@@ -21,3 +26,7 @@ export const deleteTheBoard = createAsyncThunk("boards/deleteById", async(boardI
     const res = await api.delete(`/boards/${boardId}`);
     return res.data;
 })
+
+// export const getAllTasks = createAsyncThunk("boards/getTasks", async (boardId: string)=> {
+//     const res = 
+// })

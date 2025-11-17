@@ -22,8 +22,10 @@ export const slice = createSlice({
     }).addCase(getTheBoard.pending, (state) => {
         state.loading = true;
     }).addCase(getTheBoard.fulfilled, (state, action) => {
+      console.log("getTheBoard:", action.payload)
         state.loading = false;
-        state.board = action.payload.data;
+        state.board = action.payload.board;
+        state.tasks = action.payload.tasks;
     })
       .addCase(createBoard.pending, (state) => {
         state.loading = true;
