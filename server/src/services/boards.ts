@@ -1,7 +1,7 @@
 import BoardsCollection from "../db/models/Boards";
 import { CreateBoardPayload, UpdateBoardParams } from "../types/boars";
 
-export const getBoards = () => BoardsCollection.find();
+export const getBoards = () => BoardsCollection.find().select("name _id");
 
 export const getBoardById = (boardId: string) =>
   BoardsCollection.findById(boardId);

@@ -63,5 +63,11 @@ const data = await boardsServises.deleteBoard(boardId)
 if(!data){
         console.log("something's not right, no data")
     }
-    res.status(204).send()
+    res.status(204).json({
+        status: 204,
+        message: "Success",
+        data: {
+            boardId
+        }
+    })
 }

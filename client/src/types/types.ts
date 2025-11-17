@@ -21,6 +21,7 @@ export interface TaskType {
 
 export interface BoardsInitStateTypes {
     board: BoardType | null,
+    allBoards: {name: string, _id: string}[]
     tasks: TaskType[],
     loading: boolean,
     error: boolean
