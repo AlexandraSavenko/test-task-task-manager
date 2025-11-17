@@ -12,7 +12,11 @@ const boardsInitState: BoardsInitStateTypes = {
 export const slice = createSlice({
   name: "board",
   initialState: boardsInitState,
-  reducers: {},
+  reducers: {
+    selectNoBoard (state){
+      state.board = null
+    }
+  },
   extraReducers: (builder) => {
     builder.addCase(getAllBoards.pending, (state) => {
         state.loading = true;
@@ -41,9 +45,14 @@ export const slice = createSlice({
         state.loading = true;
     }).addCase(deleteTheBoard.fulfilled, (state, action) => {
         state.loading = false;
-        state.allBoards.filter(el => el._id !== action.payload.data.boardId);
+        console.log(action.payload)
+        state.allBoards = state.allBoards.filter(el => el._id !== action.payload.data.boardId);
+        state.board = null;
+        state.tasks = [];
     });
   },
 });
 
 export default slice.reducer;
+
+export const { selectNoBoard} = slice.actions;

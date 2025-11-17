@@ -26,3 +26,6 @@ export const handleAddColumn = (
     );
     setFieldValue("columns", newListOfColumns);
   };
+
+
+ 

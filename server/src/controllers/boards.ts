@@ -61,10 +61,10 @@ const {boardId} = req.params;
 console.log("deleteBoardController", req.params)
 const data = await boardsServises.deleteBoard(boardId)
 if(!data){
-        console.log("something's not right, no data")
+        return res.status(404).json({message: "Board not found"})
     }
-    res.status(204).json({
-        status: 204,
+    res.status(200).json({
+        status: 200,
         message: "Success",
         data: {
             boardId

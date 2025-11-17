@@ -7,6 +7,7 @@ import { MdOutlinePostAdd } from "react-icons/md";
 import { handleAddColumn, handleDeleteColumn } from "../../utils/functions";
 import { useAppDispatch } from "../../hooks/redux";
 import { createBoard } from "../../redux/boards/operations";
+import Button from "../Button/Button";
 
 const boardFormInitValues: BoardFormType = {
   name: "",
@@ -15,19 +16,18 @@ const boardFormInitValues: BoardFormType = {
 };
 
 const BoardForm = () => {
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
   const handleSubmit = (
     values: BoardFormType,
     actions: FormikHelpers<BoardFormType>
   ) => {
-    const { currentColumnName, ...cleanValues} = values;
-    dispatch(createBoard(cleanValues))
+    const { currentColumnName, ...cleanValues } = values;
+    dispatch(createBoard(cleanValues));
     console.log("submit");
     console.log(cleanValues, currentColumnName);
     actions.resetForm();
   };
 
-  
   return (
     <Formik
       initialValues={boardFormInitValues}
@@ -53,13 +53,15 @@ const BoardForm = () => {
               name="currentColumnName"
               placeholder="My column is called..."
             />
-
-            <button
+            <Button onClick={() => handleAddColumn(values, setFieldValue)}>
+              <MdOutlinePostAdd />
+            </Button>
+            {/* <button
               type="button"
               onClick={() => handleAddColumn(values, setFieldValue)}
             >
               <MdOutlinePostAdd />
-            </button>
+            </button> */}
             <ErrorMessage name="columns" component="span" />
           </div>
           <div className={css.listOfColumns}>
@@ -69,14 +71,21 @@ const BoardForm = () => {
                 {values.columns.map((column, index) => (
                   <li key={index}>
                     <span>{column.title}</span>
-                    <button
+                    {/* <button
                       type="button"
                       onClick={() =>
                         handleDeleteColumn(values, setFieldValue, column)
                       }
                     >
                       <MdDeleteForever />
-                    </button>
+                    </button> */}
+                    <Button
+                      onClick={() =>
+                        handleDeleteColumn(values, setFieldValue, column)
+                      }
+                    >
+                      <MdDeleteForever />
+                    </Button>
                   </li>
                 ))}
               </ul>

@@ -1,10 +1,18 @@
-import css from './DeleteButton.module.css'
+import { MdDeleteForever } from "react-icons/md";
 
-const DeleteButton = () => {
+import css from './DeleteButton.module.css'
+import { handleDeleteColumn } from "../../utils/functions";
+
+const DeleteButton = (values, setFieldValue, column) => {
   return (
-    <div>
-      
-    </div>
+    <button
+                      type="button"
+                      onClick={() =>
+                        handleDeleteColumn(values, setFieldValue, column)
+                      }
+                    >
+                      <MdDeleteForever />
+                    </button>
   )
 }
 

@@ -5,7 +5,8 @@ export interface ColumnType {
 
 export interface BoardType {
     name: string;
-    columns: ColumnType[]
+    columns: ColumnType[];
+    _id?: string;
 }
 export interface BoardFormType {
     name: string;
