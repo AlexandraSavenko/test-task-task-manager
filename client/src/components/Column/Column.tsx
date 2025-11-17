@@ -1,13 +1,14 @@
 import css from './Column.module.css'
-import { type Column as ColumnType, type Task } from '../../types/types';
+import { type ColumnType as ColumnType, type TaskType } from '../../types/types';
 import TaskCard from '../TaskCard/TaskCard';
 import { useDroppable } from '@dnd-kit/core';
 
 interface ColumnProp {
 column: ColumnType;
-tasks: Task[]
+tasks: TaskType[]
 }
 const Column = ({column, tasks}: ColumnProp) => {
+  console.log("Hello column", tasks)
     const {setNodeRef} = useDroppable({
         id: column.id,
     })

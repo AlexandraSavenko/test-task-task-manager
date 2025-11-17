@@ -1,5 +1,5 @@
 import { DndContext, type DragEndEvent } from '@dnd-kit/core';
-import type { ColumnType, Task } from '../../types/types';
+import type { ColumnType, TaskType } from '../../types/types';
 import css from './Board.module.css'
 import { useState } from 'react';
 import Column from '../../components/Column/Column';
@@ -9,8 +9,8 @@ const COLUMNS: ColumnType[] = [
   { id: "column-DONE", title: "Done" },
 ];
 
-const TASKS: Task[] = [
-  { id: "task-1", title: "do it", description: "just do it", status: "TODO" },
+const TASKS: TaskType[] = [
+  { id: "task-1", title: "do it now", description: "just do it", status: "TODO" },
   {
     id: "task-2",
     title: "do it",
@@ -21,7 +21,8 @@ const TASKS: Task[] = [
   { id: "task-3", title: "do it", description: "just do it", status: "DONE" },
 ];
 const Board = () => {
-    const [tasks, setTasks] = useState<Task[]>(TASKS);
+    const [tasks, setTasks] = useState<TaskType[]>(TASKS);
+    console.log(TASKS)
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
     if (!over) return;
@@ -29,7 +30,7 @@ const Board = () => {
     console.log("over", over);
     
     const taskId = active.id as string;
-    const NewStatus = over.id as Task["status"];
+    const NewStatus = over.id as TaskType["status"];
 
     setTasks(() =>
       tasks.map((task) =>
