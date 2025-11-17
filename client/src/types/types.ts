@@ -1,11 +1,16 @@
 export interface ColumnType {
-    id: string;
+    id?: string;
     title: string;
 }
 
 export interface BoardType {
     name: string;
     columns: ColumnType[]
+}
+export interface BoardFormType {
+    name: string;
+     currentColumnName: string;
+     columns: ColumnType[]
 }
 export interface TaskType {
     id: string;
@@ -17,12 +22,7 @@ export interface TaskType {
 export interface BoardsInitStateTypes {
     board: BoardType | null,
     tasks: TaskType[],
-    loading: false,
-    error: false
+    loading: boolean,
+    error: boolean
 }
 
-export interface BoardFormType {
-    name: string;
-     currentColumnName: string;
-     columns: ColumnType[]
-}

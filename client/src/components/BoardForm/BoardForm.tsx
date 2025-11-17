@@ -4,8 +4,9 @@ import type { BoardFormType } from "../../types/types";
 import { initBoardSchema } from "../../schemas/board";
 import { MdDeleteForever } from "react-icons/md";
 import { MdOutlinePostAdd } from "react-icons/md";
-
-
+import { handleAddColumn, handleDeleteColumn } from "../../utils/functions";
+import { useAppDispatch } from "../../hooks/redux";
+import { createBoard } from "../../redux/boards/operations";
 
 const boardFormInitValues: BoardFormType = {
   name: "",
@@ -14,26 +15,19 @@ const boardFormInitValues: BoardFormType = {
 };
 
 const BoardForm = () => {
+  const dispatch = useAppDispatch()
   const handleSubmit = (
     values: BoardFormType,
     actions: FormikHelpers<BoardFormType>
   ) => {
-    console.log("submit")
-    console.log(values)
+    const { currentColumnName, ...cleanValues} = values;
+    dispatch(createBoard(cleanValues))
+    console.log("submit");
+    console.log(cleanValues, currentColumnName);
     actions.resetForm();
   };
 
-  const handleAddColumn = (values: BoardFormType, setFieldValue) => {
-                if (values.currentColumnName) {
-                  setFieldValue("columns", [
-                    ...values.columns,
-                    {
-                      title: values.currentColumnName,
-                    },
-                  ]);
-                  setFieldValue("currentColumnName", "");
-                }
-              }
+  
   return (
     <Formik
       initialValues={boardFormInitValues}
@@ -49,7 +43,7 @@ const BoardForm = () => {
               name="name"
               placeholder="My boards is called..."
             />
-            <ErrorMessage name="name" component="span"/>
+            <ErrorMessage name="name" component="span" />
           </div>
 
           <div className={css.fieldmWrap}>
@@ -59,32 +53,38 @@ const BoardForm = () => {
               name="currentColumnName"
               placeholder="My column is called..."
             />
-            
+
             <button
               type="button"
               onClick={() => handleAddColumn(values, setFieldValue)}
             >
               <MdOutlinePostAdd />
             </button>
-            <ErrorMessage name="columns" component="span"/>
+            <ErrorMessage name="columns" component="span" />
           </div>
           <div className={css.listOfColumns}>
             <p>List of columns:</p>
-            {
-              values.columns.length > 0 && (
-                <ul>
-                  {values.columns.map((column, index) => <li key={index}>
+            {values.columns.length > 0 && (
+              <ul>
+                {values.columns.map((column, index) => (
+                  <li key={index}>
                     <span>{column.title}</span>
-                    <button type="button" onClick={() => {
-                      const newListOfColumns = values.columns.filter(el => el.title !== column.title)
-                      setFieldValue("columns", newListOfColumns)
-                    }}><MdDeleteForever /></button>
-                    </li>)}
-                </ul>
-              )
-            }
+                    <button
+                      type="button"
+                      onClick={() =>
+                        handleDeleteColumn(values, setFieldValue, column)
+                      }
+                    >
+                      <MdDeleteForever />
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
-          <button type="submit" disabled={isSubmitting}>Save board</button>
+          <button type="submit" disabled={isSubmitting}>
+            Save board
+          </button>
         </Form>
       )}
     </Formik>
