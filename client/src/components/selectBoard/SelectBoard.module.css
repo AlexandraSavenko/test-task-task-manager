@@ -1,0 +1,28 @@
+.selectBoardWrap {
+  margin: 1em 0;
+}
+
+.selectBoardWrap select {
+  font-size: 1em;
+  padding: 0.6em 1em;
+  border: 0.1em solid #ccc;
+  border-radius: 0.4em;
+  background-color: #fff;
+  color: #333;
+  outline: none;
+  cursor: pointer;
+}
+
+.selectBoardWrap select:focus {
+  border-color: #666;
+}
+
+.selectBoardWrap option {
+  font-size: 1em;
+  padding: 0.5em;
+}
+
+.selectBoardWrap p {
+  font-size: 1em;
+  margin-top: 1em;
+}

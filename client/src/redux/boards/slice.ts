@@ -36,7 +36,10 @@ export const slice = createSlice({
       })
       .addCase(createBoard.fulfilled, (state, action) => {
         state.loading = false;
-        console.log("createBoard action payload from slice", action.payload);
+        const newBoard = action.payload.data
+        state.board = newBoard;
+        state.allBoards = [...state.allBoards]
+        console.log("createBoard action payload from slice", action.payload.data);
       })
       .addCase(createBoard.rejected, (state) => {
         state.loading = false;

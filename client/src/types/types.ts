@@ -14,7 +14,7 @@ export interface BoardFormType {
      columns: ColumnType[]
 }
 export interface TaskType {
-    id: string;
+    _id: string;
     title: string;
     description: string;
     status: string;

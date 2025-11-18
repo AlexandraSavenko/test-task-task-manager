@@ -2,7 +2,6 @@ import type { FormikHelpers } from "formik";
 import type { BoardFormType, BoardType, ColumnType } from "../types/types";
 import type { AppDispatch } from "../redux/store";
 import { createBoard, deleteTheBoard } from "../redux/boards/operations";
-import { setModalOpen } from "../redux/modal/slice";
 
 export const handleAddColumn = (
     values: BoardFormType,

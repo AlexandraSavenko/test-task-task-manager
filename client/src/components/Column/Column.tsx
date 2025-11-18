@@ -16,7 +16,7 @@ const Column = ({column, tasks}: ColumnProp) => {
     <div className={css.wrap}>
       <h2 className={css.title}>{column.title}</h2>
       <div ref={setNodeRef} className={css.taskWrap}>{
-        tasks.map(task => <TaskCard key={task.id} task={task}/>)
+        tasks.map(task => <TaskCard key={task._id} task={task}/>)
         }</div>
     </div>
   )
