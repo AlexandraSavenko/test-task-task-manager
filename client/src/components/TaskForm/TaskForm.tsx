@@ -1,30 +1,40 @@
 import { ErrorMessage, Field, Form, Formik, type FormikHelpers } from "formik";
 import css from "./TaskForm.module.css";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
-import { selectTheBoard } from "../../redux/boards/selectors";
+import { selectEditingTask, selectTheBoard } from "../../redux/boards/selectors";
 import SelectColumn from "../SelectColumn/SelectColumn";
 import Button from "../Button/Button";
 import { taskFormInitValues } from "../../values/values";
 import { initTaskSchema } from "../../schemas/task";
 import type { TaskType } from "../../types/types";
-import { createTask } from "../../redux/boards/operations";
+import { createTask, editTask } from "../../redux/boards/operations";
+import { convertTaskToFormValues } from "../../utils/functions";
 
-const TaskForm = () => {
+const TaskForm = ({formType}:{formType: string}) => {
     const theBoard = useAppSelector(selectTheBoard)
+    const editingTask = useAppSelector(selectEditingTask)
   const colunms = theBoard?.columns;
   const dispatch = useAppDispatch();
+  console.log(formType)
   const handleTaskFormSubmit = (
     values: TaskType,
     actions: FormikHelpers<TaskType>
   ) => {
     if(!theBoard) return;
+    console.log("Task form", editingTask)
     
+    if(formType === "editTask"){
+      console.log("task form editTask")
+      dispatch(editTask({editedTask: values, boardId: theBoard._id || "", taskId: editingTask?._id || ""}))
+    return;
+    }
     dispatch(createTask({newTask: values, boardId: theBoard._id || ""}))
     actions.resetForm();
   };
+  const initialValues = formType === "editTask" && editingTask ? convertTaskToFormValues(editingTask)  : taskFormInitValues
   return (
     <Formik
-      initialValues={taskFormInitValues}
+      initialValues={initialValues}
       validationSchema={initTaskSchema}
       onSubmit={handleTaskFormSubmit}
     >

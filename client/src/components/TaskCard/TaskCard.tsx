@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import Button from '../Button/Button';
 import { handleDeleteTask } from '../../utils/functions';
 import { selectTheBoard } from '../../redux/boards/selectors';
+import { setEditingTask, setModalOpen } from '../../redux/boards/slice';
 
 interface TaskCardProp {
     task: TaskType;
@@ -24,6 +25,9 @@ const TaskCard = ({task}: TaskCardProp) => {
       <h3 className={css.title}>{task.title}</h3>
       <p className={css.description}>{task.description}</p>
       <Button onClick={() => handleDeleteTask(task._id, board?._id, dispatch)}>del</Button>
+      <Button onClick={() => {dispatch(setModalOpen("editTask")); console.log("taskCard", task); dispatch(setEditingTask(task))}}>
+            Edi
+          </Button>
     </div>
   )
 }

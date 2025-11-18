@@ -1,5 +1,5 @@
 import type { FormikHelpers } from "formik";
-import type { BoardFormType, BoardType, ColumnType } from "../types/types";
+import type { BoardFormType, BoardType, ColumnType, TaskType } from "../types/types";
 import type { AppDispatch } from "../redux/store";
 import {
   createBoard,
@@ -41,6 +41,11 @@ export const convertBoardToFormValues = (board: BoardType) => ({
   })),
 });
 
+export const convertTaskToFormValues = (task: TaskType) => ({
+  title: task.title,
+  description: task.description,
+  status: task.status
+})
 export const handleSubmit = (
   values: BoardFormType,
   actions: FormikHelpers<BoardFormType>,

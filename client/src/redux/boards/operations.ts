@@ -49,11 +49,6 @@ export const deleteTheBoard = createAsyncThunk(
   }
 );
 
-// export const getAllTasks = createAsyncThunk("boards/getTasks", async (boardId: string)=> {
-//     const res = await api.get(`boards/${boardId}/tasks`)
-//     return res.data.data;
-// })
-
 export const createTask = createAsyncThunk(
   "boards/addTask",
   async ({ newTask, boardId }: { newTask: TaskType; boardId: string }) => {
@@ -66,6 +61,13 @@ export const createTask = createAsyncThunk(
 export const deleteTask = createAsyncThunk(
   "boards/deleteTask", async ({boardId, taskId}: {boardId: string; taskId: string}) => {
     const res = await api.delete(`/boards/${boardId}/tasks/${taskId}`)
+    return res.data.data;
+  }
+)
+
+export const editTask = createAsyncThunk(
+  "boards/editTask", async ({boardId, taskId, editedTask}: {boardId: string; taskId: string; editedTask: TaskType}) => {
+    const res = await api.put(`/boards/${boardId}/tasks/${taskId}`, {...editedTask, boardId});
     return res.data.data;
   }
 )

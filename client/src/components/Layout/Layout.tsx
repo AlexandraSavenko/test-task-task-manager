@@ -15,7 +15,6 @@ interface Props {
 }
 const Layout: React.FC<Props> = ({children}) => {
     const dispatch = useAppDispatch();
-
   const isModalOpen = useAppSelector(selectIsModalOpen)
     const closeModal = () => dispatch(setModalOpen(""));
 
@@ -26,7 +25,7 @@ const Layout: React.FC<Props> = ({children}) => {
         <Modal onClose={closeModal}>
           {isModalOpen === "createBoard" && <BoardForm />}
           {isModalOpen === "editBoard" && <EditBoardForm/>}
-          {isModalOpen == "createTask" && <TaskForm/>}
+          {(isModalOpen === "createTask" || isModalOpen === "editTask") && <TaskForm formType={isModalOpen}/>}
         </Modal>
       )}
       <Suspense fallback={null}>{children}</Suspense>

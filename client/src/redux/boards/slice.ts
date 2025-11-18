@@ -6,6 +6,7 @@ import {
   deleteTask,
   deleteTheBoard,
   editBoard,
+  editTask,
   getAllBoards,
   getTheBoard,
 } from "./operations";
@@ -14,6 +15,7 @@ const boardsInitState: BoardsInitStateTypes = {
   board: null,
   allBoards: [],
   tasks: [],
+  editingTask: null,
   isModalOpen: "",
   loading: false,
   error: false,
@@ -28,6 +30,9 @@ export const slice = createSlice({
     setModalOpen(state, action) {
       state.isModalOpen = action.payload;
     },
+    setEditingTask(state, action) {
+      state.editingTask = action.payload
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -43,7 +48,6 @@ export const slice = createSlice({
       })
       .addCase(getTheBoard.fulfilled, (state, action) => {
         state.loading = false;
-        console.log(action.payload.tasks);
         state.board = action.payload.board;
         state.tasks = action.payload.tasks;
       })
@@ -74,7 +78,6 @@ export const slice = createSlice({
       })
       .addCase(deleteTheBoard.fulfilled, (state, action) => {
         state.loading = false;
-        console.log(action.payload);
         state.allBoards = state.allBoards.filter(
           (el) => el._id !== action.payload.data.boardId
         );
@@ -94,12 +97,19 @@ export const slice = createSlice({
         state.loading = false;
         state.tasks = [...state.tasks, action.payload];
         state.isModalOpen = ""
-      }).addCase(deleteTask.pending, (state) => {
+      }).addCase(editTask.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(editTask.fulfilled, (state, action) => {
+        state.loading = false;
+        state.tasks = state.tasks.map(el => el._id === action.payload._id ? action.payload : el);
+        state.isModalOpen = ""
+      })
+      .addCase(deleteTask.pending, (state) => {
         state.loading = true;
       })
       .addCase(deleteTask.fulfilled, (state, action) => {
         state.loading = false;
-        console.log("deleteTask", action.payload)
         state.tasks = state.tasks.filter(el => el._id !== action.payload.taskId);
       });
   },
@@ -107,4 +117,4 @@ export const slice = createSlice({
 
 export default slice.reducer;
 
-export const { selectNoBoard, setModalOpen } = slice.actions;
+export const { selectNoBoard, setModalOpen, setEditingTask } = slice.actions;
