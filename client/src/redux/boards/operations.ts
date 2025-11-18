@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { api } from "../../app/axios";
-import type { BoardType, TaskType } from "../../types/types";
+import type { BoardFormType, BoardType, TaskType } from "../../types/types";
 
 export const getAllBoards = createAsyncThunk("boards/getAll", async () => {
   const res = await api.get("/boards");
@@ -27,6 +27,20 @@ export const createBoard = createAsyncThunk(
     return res.data;
   }
 );
+
+export const editBoard = createAsyncThunk(
+  "boards/editBoard",
+  async ({
+    editedBoard,
+    boardId,
+  }: {
+    editedBoard: BoardFormType;
+    boardId: string;
+  }) => {
+    const res = await api.put(`/boards/${boardId}`, editedBoard);
+    return res.data.data;
+  }
+);
 export const deleteTheBoard = createAsyncThunk(
   "boards/deleteById",
   async (boardId: string) => {
@@ -42,8 +56,16 @@ export const deleteTheBoard = createAsyncThunk(
 
 export const createTask = createAsyncThunk(
   "boards/addTask",
-  async ({ newTask, boardId}: { newTask: TaskType; boardId: string }) => {
+  async ({ newTask, boardId }: { newTask: TaskType; boardId: string }) => {
     const res = await api.post(`/boards/${boardId}/tasks`, newTask);
     return res.data.data;
   }
 );
+
+
+export const deleteTask = createAsyncThunk(
+  "boards/deleteTask", async ({boardId, taskId}: {boardId: string; taskId: string}) => {
+    const res = await api.delete(`/boards/${boardId}/tasks/${taskId}`)
+    return res.data.data;
+  }
+)

@@ -6,8 +6,8 @@ import Button from "../Button/Button";
 import css from "./Board.module.css";
 import Column from "../Column/Column";
 import type { BoardType } from "../../types/types";
-import { setModalOpen } from "../../redux/modal/slice";
-import { useEffect } from "react";
+import { setModalOpen } from "../../redux/boards/slice";
+// import { useEffect } from "react";
 
 interface BoardProps {
   boardInfo: BoardType;
@@ -15,7 +15,7 @@ interface BoardProps {
 const Board = ({ boardInfo }: BoardProps) => {
   // const boardInfo = useAppSelector(selectTheBoard);
   const tasks = useAppSelector(selectTasks);
-  useEffect(() => {console.log(tasks)}, [tasks])
+  // useEffect(() => {console.log(tasks)}, [tasks])
   const dispatch = useAppDispatch();
   return (
     <div className={css.taskMan}>

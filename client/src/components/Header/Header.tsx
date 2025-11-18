@@ -1,5 +1,5 @@
 import { useAppDispatch } from "../../hooks/redux";
-import { setModalOpen } from "../../redux/modal/slice";
+import { setModalOpen } from "../../redux/boards/slice";
 import Button from "../Button/Button";
 import Logo from "../logo/Logo";
 import SelectBoard from "../selectBoard/SelectBoard";

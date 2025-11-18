@@ -50,5 +50,11 @@ export const deleteTaskController = async (req: Request, res: Response) => {
   if (!data) {
     console.log("something's not right, no data");
   }
-  res.status(204).send();
+  res.status(200).json({
+    status: 200,
+    message: "Success",
+    data: {
+      taskId
+    }
+  });
 };

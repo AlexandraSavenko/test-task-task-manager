@@ -1,7 +1,7 @@
 export interface ColumnType {
     _id?: string;
     title: string;
-    index: string;
+    index?: string;
 }
 
 export interface BoardType {
@@ -25,6 +25,7 @@ export interface BoardsInitStateTypes {
     board: BoardType | null,
     allBoards: {name: string, _id: string}[]
     tasks: TaskType[],
+    isModalOpen: string;
     loading: boolean,
     error: boolean
 }

@@ -2,6 +2,7 @@
 import { useAppSelector } from "../../hooks/redux";
 import { selectTheBoard } from "../../redux/boards/selectors";
 import Board from "../../components/Board/Board";
+import NoBoard from "../../components/noBoard/NoBoard";
 
 const BoardPage = () => {
   const boardInfo = useAppSelector(selectTheBoard);
@@ -9,7 +10,7 @@ const BoardPage = () => {
   return boardInfo ? (
     <Board boardInfo={boardInfo} />
   ) : (
-    <p>Sorry, you need to select a board</p>
+    <NoBoard/>
   );
 };
 

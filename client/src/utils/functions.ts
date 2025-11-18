@@ -1,70 +1,100 @@
 import type { FormikHelpers } from "formik";
 import type { BoardFormType, BoardType, ColumnType } from "../types/types";
 import type { AppDispatch } from "../redux/store";
-import { createBoard, deleteTheBoard } from "../redux/boards/operations";
+import {
+  createBoard,
+  deleteTask,
+  deleteTheBoard,
+  editBoard,
+} from "../redux/boards/operations";
 
 export const handleAddColumn = (
-    values: BoardFormType,
-    setFieldValue: FormikHelpers<BoardFormType>["setFieldValue"]
-  ) => {
-    if (values.currentColumnName) {
-      setFieldValue("columns", [
-        ...values.columns,
-        {
-          title: values.currentColumnName,
-        },
-      ]);
-      setFieldValue("currentColumnName", "");
-    }
-  };
+  values: BoardFormType,
+  setFieldValue: FormikHelpers<BoardFormType>["setFieldValue"]
+) => {
+  if (values.currentColumnName) {
+    setFieldValue("columns", [
+      ...values.columns,
+      {
+        title: values.currentColumnName,
+      },
+    ]);
+    setFieldValue("currentColumnName", "");
+  }
+};
 
-  export const handleDeleteColumn = (
-    values: BoardFormType,
-    setFieldValue: FormikHelpers<BoardFormType>["setFieldValue"],
-    column: ColumnType
-  ) => {
-    const newListOfColumns = values.columns.filter(
-      (el) => el.title !== column.title
-    );
-    setFieldValue("columns", newListOfColumns);
-  };
+export const handleDeleteColumn = (
+  values: BoardFormType,
+  setFieldValue: FormikHelpers<BoardFormType>["setFieldValue"],
+  column: ColumnType
+) => {
+  const newListOfColumns = values.columns.filter(
+    (el) => el.title !== column.title
+  );
+  setFieldValue("columns", newListOfColumns);
+};
 
-
- export const convertBoardToFormValues = (board: BoardType) => ({
+export const convertBoardToFormValues = (board: BoardType) => ({
   name: board.name,
-  columns: board.columns.map(col => ({
-    title: col.title
-  }))
- })
+  columns: board.columns.map((col) => ({
+    title: col.title,
+  })),
+});
 
- export const handleSubmit = (values: BoardFormType, actions: FormikHelpers<BoardFormType>, dispatch: AppDispatch) => {
-const { currentColumnName, ...cleanValues } = values;
-    dispatch(createBoard(cleanValues));
-    console.log("submit");
-    console.log(cleanValues, currentColumnName);
-    actions.resetForm();
- }
+export const handleSubmit = (
+  values: BoardFormType,
+  actions: FormikHelpers<BoardFormType>,
+  dispatch: AppDispatch
+) => {
+  const { currentColumnName, ...cleanValues } = values;
+  dispatch(createBoard(cleanValues));
+  console.log("submit");
+  console.log(cleanValues, currentColumnName);
+  actions.resetForm();
+};
 
- export const handleDeleteBoard = (boardId: string | undefined, dispatch: AppDispatch) => {
-    if (!boardId) return;
-    dispatch(deleteTheBoard(boardId));
-  };
+export const handleEditForm = (
+  values: BoardFormType,
+  actions: FormikHelpers<BoardFormType>,
+  boardId: string,
+  dispatch: AppDispatch
+) => {
+  dispatch(editBoard({ editedBoard: values, boardId }));
+  actions.resetForm();
+};
 
-  // export const handleEditBoard = (dispatch: AppDispatch) => {
-  //   dispatch(setModalOpen("editBoard"))
-  // }
-  // export const handleDragEnd = (event: DragEndEvent) => {
-  //   const { active, over } = event;
-  //   if (!over) return;
-  //   console.log("active", active);
-  //   console.log("over", over);
+export const handleDeleteBoard = (
+  boardId: string | undefined,
+  dispatch: AppDispatch
+) => {
+  if (!boardId) return;
+  dispatch(deleteTheBoard(boardId));
+};
 
-  //   const taskId = active.id as string;
-  //   const NewStatus = over.id as TaskType["status"];
 
-  //   setTasks(() =>
-  //     tasks.map((task) =>
-  //       task.id === taskId ? { ...task, status: NewStatus } : task
-  //     )
-  //   );
-  // };
+export const handleDeleteTask = (
+  taskId: string | undefined,
+  boardId: string | undefined,
+  dispatch: AppDispatch
+) => {
+  if(!taskId || !boardId) return;
+  dispatch(deleteTask({taskId, boardId}))
+}
+// export const handleEditBoard = (dispatch: AppDispatch) => {
+//   dispatch(setModalOpen("editBoard"))
+// }
+// export const handleDragEnd = (event: DragEndEvent) => {
+//   const { active, over } = event;
+//   if (!over) return;
+//   console.log("active", active);
+//   console.log("over", over);
+
+//   const taskId = active.id as string;
+//   const NewStatus = over.id as TaskType["status"];
+
+//   setTasks(() =>
+//     tasks.map((task) =>
+//       task.id === taskId ? { ...task, status: NewStatus } : task
+//     )
+//   );
+// };
