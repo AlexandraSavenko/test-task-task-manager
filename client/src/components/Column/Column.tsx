@@ -8,9 +8,8 @@ column: ColumnType;
 tasks: TaskType[]
 }
 const Column = ({column, tasks}: ColumnProp) => {
-  console.log("Hello column", tasks)
     const {setNodeRef} = useDroppable({
-        id: column.id,
+        id: column.index,
     })
   return (
     <div className={css.wrap}>

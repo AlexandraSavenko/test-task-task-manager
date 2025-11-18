@@ -6,8 +6,13 @@ export const getBoards = () => BoardsCollection.find().select("name _id");
 export const getBoardById = (boardId: string) =>
   BoardsCollection.findById(boardId);
 
-export const addBoard = (payload: CreateBoardPayload) =>
-  BoardsCollection.create(payload);
+export const addBoard = (payload: CreateBoardPayload) => {
+  const columnsWithIndex = payload.columns.map((column) => ({
+    ...column,
+    index: column.title.split(/\s+/).join("").toUpperCase(),
+  }));
+  BoardsCollection.create({ ...payload, columns: columnsWithIndex });
+};
 
 export const updateBoard = async ({
   boardId,

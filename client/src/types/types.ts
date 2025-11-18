@@ -1,6 +1,7 @@
 export interface ColumnType {
-    id?: string;
+    _id?: string;
     title: string;
+    index: string;
 }
 
 export interface BoardType {
@@ -14,7 +15,7 @@ export interface BoardFormType {
      columns: ColumnType[]
 }
 export interface TaskType {
-    _id: string;
+    _id?: string;
     title: string;
     description: string;
     status: string;

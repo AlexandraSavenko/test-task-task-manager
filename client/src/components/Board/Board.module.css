@@ -1,0 +1,50 @@
+.taskMan {
+  padding: 1em;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f5f5f5;
+  min-height: 100vh;
+}
+
+/* Board header with buttons */
+.boardMenu {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1em;
+  background-color: #ffffff;
+  padding: 0.5em 1em;
+  border-radius: 0.5em;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.boardMenu p {
+  font-weight: 600;
+  margin: 0;
+  font-size: 1.2em;
+}
+
+.boardMenu button {
+  margin-left: 0.5em;
+}
+
+/* Columns wrapper */
+.wrap {
+  display: flex;
+  gap: 1em;
+  overflow-x: auto; /* horizontal scroll for many columns */
+  padding-bottom: 1em;
+}
+
+/* Optional: make scrollbar thinner and nicer */
+.wrap::-webkit-scrollbar {
+  height: 6px;
+}
+
+.wrap::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+}
+
+.wrap::-webkit-scrollbar-track {
+  background: transparent;
+}

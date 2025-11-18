@@ -1,20 +1,20 @@
 // import { DndContext } from '@dnd-kit/core';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { selectTasks } from '../../redux/boards/selectors';
-import { handleDeleteBoard } from '../../utils/functions'
-import Button from '../Button/Button'
-import css from './Board.module.css'
-import Column from '../Column/Column';
-import type { BoardType } from '../../types/types';
-import { setModalOpen } from '../../redux/modal/slice';
+import { useAppDispatch, useAppSelector } from "../../hooks/redux";
+import { selectTasks } from "../../redux/boards/selectors";
+import { handleDeleteBoard } from "../../utils/functions";
+import Button from "../Button/Button";
+import css from "./Board.module.css";
+import Column from "../Column/Column";
+import type { BoardType } from "../../types/types";
+import { setModalOpen } from "../../redux/modal/slice";
 
 interface BoardProps {
-    boardInfo: BoardType;
+  boardInfo: BoardType;
 }
-const Board = ({boardInfo}: BoardProps) => {
-    // const boardInfo = useAppSelector(selectTheBoard);
-    const tasks = useAppSelector(selectTasks)
-        const dispatch = useAppDispatch();
+const Board = ({ boardInfo }: BoardProps) => {
+  // const boardInfo = useAppSelector(selectTheBoard);
+  const tasks = useAppSelector(selectTasks);
+  const dispatch = useAppDispatch();
   return (
     <div className={css.taskMan}>
       <div>
@@ -26,22 +26,25 @@ const Board = ({boardInfo}: BoardProps) => {
           <Button onClick={() => dispatch(setModalOpen("editBoard"))}>
             Edit Board
           </Button>
+          <Button onClick={() => dispatch(setModalOpen("createTask"))}>
+            Add Task
+          </Button>
         </div>
 
         <div className={css.wrap}>
           {/* <DndContext onDragEnd={handleDragEnd}> */}
-            {boardInfo?.columns.map((column) => (
-              <Column
-                key={column.id}
-                column={column}
-                tasks={tasks.filter((task) => task.status === column.id)}
-              />
-            ))}
+          {boardInfo?.columns.map((column) => (
+            <Column
+              key={column._id}
+              column={column}
+              tasks={tasks.filter((task) => task.status === column._id)}
+            />
+          ))}
           {/* </DndContext> */}
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Board;

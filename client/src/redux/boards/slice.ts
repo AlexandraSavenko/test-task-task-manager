@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { BoardsInitStateTypes } from "../../types/types";
-import { createBoard, deleteTheBoard, getAllBoards, getTheBoard } from "./operations";
+import { createBoard, createTask, deleteTheBoard, getAllBoards, getTheBoard } from "./operations";
 
 const boardsInitState: BoardsInitStateTypes = {
   board: null,
@@ -52,7 +52,13 @@ export const slice = createSlice({
         state.allBoards = state.allBoards.filter(el => el._id !== action.payload.data.boardId);
         state.board = null;
         state.tasks = [];
-    });
+    }).addCase(createTask.pending, (state) => {
+      state.loading = true;
+    }).addCase(createTask.fulfilled, (state, action) => {
+      state.loading = false;
+      state.tasks = [...state.tasks, action.payload]
+    })
+    ;
   },
 });
 

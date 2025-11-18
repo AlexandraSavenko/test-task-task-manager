@@ -8,6 +8,7 @@ import { selectIsModalOpen } from '../../redux/modal/selectors';
 import { setModalOpen } from '../../redux/modal/slice';
 import BoardForm from '../BoardForm/BoardForm';
 import EditBoardForm from '../EditBoardForm/EditBoardForm';
+import TaskForm from '../TaskForm/TaskForm';
 
 interface Props {
     children: React.ReactNode;
@@ -25,6 +26,7 @@ const Layout: React.FC<Props> = ({children}) => {
         <Modal onClose={closeModal}>
           {isModalOpen === "createBoard" && <BoardForm />}
           {isModalOpen === "editBoard" && <EditBoardForm/>}
+          {isModalOpen == "createTask" && <TaskForm/>}
         </Modal>
       )}
       <Suspense fallback={null}>{children}</Suspense>
