@@ -1,7 +1,7 @@
 import css from './Button.module.css'
 
 interface ButtonProps {
-    onClick: () => void;
+    onClick?: () => void;
     children: React.ReactNode;
     type?: "button" | "submit";
 }

@@ -1,38 +1,35 @@
-import { ErrorMessage, Field, Form, Formik, type FormikHelpers } from "formik";
+import { ErrorMessage, Field, Form, Formik } from "formik";
 import css from "./BoardForm.module.css";
-import type { BoardFormType } from "../../types/types";
+// import type { BoardFormType } from "../../types/types";
 import { initBoardSchema } from "../../schemas/board";
 import { MdDeleteForever } from "react-icons/md";
 import { MdOutlinePostAdd } from "react-icons/md";
-import { handleAddColumn, handleDeleteColumn } from "../../utils/functions";
+import { handleAddColumn, handleDeleteColumn, handleSubmit } from "../../utils/functions";
 import { useAppDispatch } from "../../hooks/redux";
-import { createBoard } from "../../redux/boards/operations";
+// import { createBoard } from "../../redux/boards/operations";
 import Button from "../Button/Button";
+import { boardFormInitValues } from "../../values/values";
 
-const boardFormInitValues: BoardFormType = {
-  name: "",
-  currentColumnName: "",
-  columns: [],
-};
+
 
 const BoardForm = () => {
   const dispatch = useAppDispatch();
-  const handleSubmit = (
-    values: BoardFormType,
-    actions: FormikHelpers<BoardFormType>
-  ) => {
-    const { currentColumnName, ...cleanValues } = values;
-    dispatch(createBoard(cleanValues));
-    console.log("submit");
-    console.log(cleanValues, currentColumnName);
-    actions.resetForm();
-  };
+  // const handleSubmit = (
+  //   values: BoardFormType,
+  //   actions: FormikHelpers<BoardFormType>
+  // ) => {
+  //   const { currentColumnName, ...cleanValues } = values;
+  //   dispatch(createBoard(cleanValues));
+  //   console.log("submit");
+  //   console.log(cleanValues, currentColumnName);
+  //   actions.resetForm();
+  // };
 
   return (
     <Formik
       initialValues={boardFormInitValues}
       validationSchema={initBoardSchema}
-      onSubmit={handleSubmit}
+      onSubmit={(values, actions) => handleSubmit(values,actions, dispatch )}
     >
       {({ values, setFieldValue, isSubmitting }) => (
         <Form>

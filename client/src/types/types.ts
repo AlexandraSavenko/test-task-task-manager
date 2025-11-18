@@ -10,7 +10,7 @@ export interface BoardType {
 }
 export interface BoardFormType {
     name: string;
-     currentColumnName: string;
+     currentColumnName?: string;
      columns: ColumnType[]
 }
 export interface TaskType {

@@ -1,5 +1,8 @@
 import type { FormikHelpers } from "formik";
-import type { BoardFormType, ColumnType } from "../types/types";
+import type { BoardFormType, BoardType, ColumnType } from "../types/types";
+import type { AppDispatch } from "../redux/store";
+import { createBoard, deleteTheBoard } from "../redux/boards/operations";
+import { setModalOpen } from "../redux/modal/slice";
 
 export const handleAddColumn = (
     values: BoardFormType,
@@ -28,4 +31,41 @@ export const handleAddColumn = (
   };
 
 
- 
+ export const convertBoardToFormValues = (board: BoardType) => ({
+  name: board.name,
+  columns: board.columns.map(col => ({
+    title: col.title
+  }))
+ })
+
+ export const handleSubmit = (values: BoardFormType, actions: FormikHelpers<BoardFormType>, dispatch: AppDispatch) => {
+const { currentColumnName, ...cleanValues } = values;
+    dispatch(createBoard(cleanValues));
+    console.log("submit");
+    console.log(cleanValues, currentColumnName);
+    actions.resetForm();
+ }
+
+ export const handleDeleteBoard = (boardId: string | undefined, dispatch: AppDispatch) => {
+    if (!boardId) return;
+    dispatch(deleteTheBoard(boardId));
+  };
+
+  // export const handleEditBoard = (dispatch: AppDispatch) => {
+  //   dispatch(setModalOpen("editBoard"))
+  // }
+  // export const handleDragEnd = (event: DragEndEvent) => {
+  //   const { active, over } = event;
+  //   if (!over) return;
+  //   console.log("active", active);
+  //   console.log("over", over);
+
+  //   const taskId = active.id as string;
+  //   const NewStatus = over.id as TaskType["status"];
+
+  //   setTasks(() =>
+  //     tasks.map((task) =>
+  //       task.id === taskId ? { ...task, status: NewStatus } : task
+  //     )
+  //   );
+  // };
