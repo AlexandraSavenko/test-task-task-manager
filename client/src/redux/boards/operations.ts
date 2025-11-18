@@ -36,7 +36,8 @@ export const deleteTheBoard = createAsyncThunk(
 );
 
 // export const getAllTasks = createAsyncThunk("boards/getTasks", async (boardId: string)=> {
-//     const res =
+//     const res = await api.get(`boards/${boardId}/tasks`)
+//     return res.data.data;
 // })
 
 export const createTask = createAsyncThunk(

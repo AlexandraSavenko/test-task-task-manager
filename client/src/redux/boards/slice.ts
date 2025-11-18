@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { BoardsInitStateTypes } from "../../types/types";
-import { createBoard, createTask, deleteTheBoard, getAllBoards, getTheBoard } from "./operations";
+import { createBoard, createTask, deleteTheBoard, getAllBoards, getAllTasks, getTheBoard } from "./operations";
 
 const boardsInitState: BoardsInitStateTypes = {
   board: null,
@@ -28,6 +28,7 @@ export const slice = createSlice({
     }).addCase(getTheBoard.fulfilled, (state, action) => {
       console.log("getTheBoard:", action.payload)
         state.loading = false;
+        console.log(action.payload.tasks)
         state.board = action.payload.board;
         state.tasks = action.payload.tasks;
     })
@@ -52,7 +53,14 @@ export const slice = createSlice({
         state.allBoards = state.allBoards.filter(el => el._id !== action.payload.data.boardId);
         state.board = null;
         state.tasks = [];
-    }).addCase(createTask.pending, (state) => {
+    })
+    // .addCase(getAllTasks.pending, (state) => {
+    //   state.loading = true;
+    // }).addCase(getAllTasks.fulfilled, (state, action) => {
+    //   state.loading = false;
+    //   state.tasks = [action.payload]
+    // })
+    .addCase(createTask.pending, (state) => {
       state.loading = true;
     }).addCase(createTask.fulfilled, (state, action) => {
       state.loading = false;

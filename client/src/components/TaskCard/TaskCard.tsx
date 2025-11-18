@@ -1,14 +1,14 @@
 import { useDraggable } from '@dnd-kit/core';
-import type { Task } from '../../types/types'
+import type { TaskType } from '../../types/types'
 import css from './TaskCard.module.css'
 import { useEffect } from 'react';
 
 interface TaskCardProp {
-    task: Task;
+    task: TaskType;
 }
 const TaskCard = ({task}: TaskCardProp) => {
     const { attributes, listeners, setNodeRef, transform} = useDraggable({
-        id: task.id
+        id: task._id || ""
     })
 
     const style = transform ? {

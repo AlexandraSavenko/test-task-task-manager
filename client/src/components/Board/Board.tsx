@@ -7,6 +7,7 @@ import css from "./Board.module.css";
 import Column from "../Column/Column";
 import type { BoardType } from "../../types/types";
 import { setModalOpen } from "../../redux/modal/slice";
+import { useEffect } from "react";
 
 interface BoardProps {
   boardInfo: BoardType;
@@ -14,6 +15,7 @@ interface BoardProps {
 const Board = ({ boardInfo }: BoardProps) => {
   // const boardInfo = useAppSelector(selectTheBoard);
   const tasks = useAppSelector(selectTasks);
+  useEffect(() => {console.log(tasks)}, [tasks])
   const dispatch = useAppDispatch();
   return (
     <div className={css.taskMan}>
@@ -37,7 +39,7 @@ const Board = ({ boardInfo }: BoardProps) => {
             <Column
               key={column._id}
               column={column}
-              tasks={tasks.filter((task) => task.status === column._id)}
+              tasks={tasks.filter((task) => task.status === column.index)}
             />
           ))}
           {/* </DndContext> */}
