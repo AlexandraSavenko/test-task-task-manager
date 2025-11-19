@@ -7,11 +7,16 @@ import NoBoard from "../../components/noBoard/NoBoard";
 const BoardPage = () => {
   const boardInfo = useAppSelector(selectTheBoard);
 
-  return boardInfo ? (
+  return <div className="container">
+    {
+      boardInfo ? (
     <Board boardInfo={boardInfo} />
   ) : (
     <NoBoard/>
-  );
+  )
+    }
+  </div>
+   
 };
 
 export default BoardPage;

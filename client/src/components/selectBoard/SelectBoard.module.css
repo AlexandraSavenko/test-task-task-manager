@@ -3,18 +3,17 @@
 }
 
 .selectBoardWrap select {
-  font-size: 1em;
-  padding: 0.6em 1em;
-  border: 0.1em solid #ccc;
+  padding: 0.2rem 1rem;
+  border: none;
   border-radius: 0.4em;
-  background-color: #fff;
-  color: #333;
+  background-color: var(--gray-light);
+  color: var(--gray-text);
   outline: none;
   cursor: pointer;
 }
 
 .selectBoardWrap select:focus {
-  border-color: #666;
+  border-color: var(--orange-bright);
 }
 
 .selectBoardWrap option {
@@ -22,7 +21,14 @@
   padding: 0.5em;
 }
 
-.selectBoardWrap p {
+.select option:hover {
+  background: var(--orange-bright);
+}
+
+.select option:checked {
+  background: #e6e3ff;
+}
+/* .selectBoardWrap p {
   font-size: 1em;
   margin-top: 1em;
-}
+} */

@@ -1,73 +1,138 @@
-# React + TypeScript + Vite
+TaskMan -- Board management app
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A board management application built with React, TypeScript, Redux Toolkit, and Node.js/Express with MongoDB. This app allows users to create boards, manage columns and tasks, and drag & drop tasks between columns.
 
-Currently, two official plugins are available:
+🛠 Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Create, edit, and delete boards
 
-## React Compiler
+Add, edit, and delete columns within boards
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+Add, edit, and delete tasks within columns
 
-## Expanding the ESLint configuration
+Drag and drop tasks between columns
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Responsive layout
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Global loading and error handling with Redux and toast notifications
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+Form validation using Formik + Yup/Joi
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Backend API with Express, MongoDB, and Mongoose
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Clean error handling and validation on the backend
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+🧰 Tech Stack
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Frontend:
+
+React + TypeScript
+
+Redux Toolkit
+
+Formik + Yup
+
+react-hot-toast
+
+@dnd-kit for drag-and-drop
+
+CSS Modules
+
+Backend:
+
+Node.js + Express
+
+MongoDB + Mongoose
+
+Joi for validation
+
+async/await with centralized error handling
+
+🚀 Installation
+
+Clone the repository
+
+git clone <https://github.com/AlexandraSavenko/test-task-task-manager.git>
+cd <test-task-task-manager>
+
+
+Install dependencies
+
+# frontend
+cd client
+npm install
+
+# backend
+cd server
+npm install
+
+
+Set up environment variables
+Create a .env file in server with your MongoDB connection string:
+
+MONGO_URI=your_mongo_connection_string
+PORT=5000
+> ⚠️ Replace `your_mongo_connection_string` with your own MongoDB URI.  
+> Never commit your `.env` file containing credentials to GitHub.
+
+Run the project
+
+# start backend
+cd server
+npm run dev
+
+# start frontend
+cd client
+npm start
+
+📦 Project Structure
+client/               # Frontend (React + TS)
+  src/
+    app/              # axios initiation
+    components/       # Reusable components
+    hooks/            # Redux reusable type hooks
+    pages/            # Pages / views
+    redux/            # Redux slices and store
+    schemas/          # Yup schemas
+    types/            # typescript reused interfaces
+    utils/            # functions
+    values/           # Form initial values
+  
+
+
+server/               # Backend (Express + TS)
+  controllers/        # API controllers
+  db/                 # Mongoose schemas
+  middlewares/        # Validation & error handling
+  routes/             # Express routes
+  services/           # Functions
+  types/              # Reusable interfaces
+  utils/              # Functions
+  validation/         # Joi schemas
+       
+
+⚡ Usage
+
+Open the app in your browser (http://localhost:3000)
+
+Create a new board with a name
+
+Add columns to your board
+
+Add tasks to columns
+
+Drag tasks between columns
+
+Edit or delete boards, columns, and tasks as needed
+
+🔧 Notes
+
+Task and column IDs are used to maintain relationships — editing a board or column does not break task connections.
+
+Drag-and-drop updates task status in real time.
+
+Global loader and error notifications help track backend operations.
+
+📜 License
+
+This project is open-source and available under the MIT License.

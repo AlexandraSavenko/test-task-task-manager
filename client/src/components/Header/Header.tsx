@@ -11,7 +11,7 @@ const Header = () => {
     dispatch(setModalOpen("createBoard"));
   };
   return (
-    <div className={css.headerWrap}>
+    <div className={`${css.headerWrap} container`}>
       <Logo/>
       <SelectBoard />
       <Button onClick={handleCreateBoard}>Create Board</Button>

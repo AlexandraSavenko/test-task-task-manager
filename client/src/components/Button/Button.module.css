@@ -1,0 +1,28 @@
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: fit-content;
+  padding: 0.3rem 1rem;
+  background: var(--gray-light);
+  color: var(--gray-text);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+
+  transition: background 0.22s ease, transform 0.12s ease;
+}
+
+.btn:hover {
+  background: var(--orange-bright);
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+/* .btn:disabled {
+  background: #bdbdbd;
+  cursor: not-allowed;
+  transform: none;
+} */

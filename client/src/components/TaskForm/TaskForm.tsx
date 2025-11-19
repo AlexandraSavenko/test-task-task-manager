@@ -39,13 +39,13 @@ const TaskForm = ({formType}:{formType: string}) => {
       onSubmit={handleTaskFormSubmit}
     >
       <Form>
-        <div className={css.inputWrap}>
-          <label htmlFor=""></label>
+        <div className={css.fieldWrap}>
+          <label htmlFor="">Task:</label>
           <Field id="taskName" name="title" />
           <ErrorMessage name="title" component="span" />
         </div>
-        <div className={css.inputWrap}>
-          <label htmlFor=""></label>
+        <div className={css.fieldWrap}>
+          <label htmlFor="">Description:</label>
           <Field as="textarea" id="taskDescript" name="description" />
         <ErrorMessage name="description" component="span" />
 

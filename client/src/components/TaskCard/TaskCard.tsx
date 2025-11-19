@@ -1,39 +1,51 @@
-import { useDraggable } from '@dnd-kit/core';
-import type { TaskType } from '../../types/types'
-import css from './TaskCard.module.css'
-import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import Button from '../Button/Button';
-import { handleDeleteTask } from '../../utils/functions';
-import { selectTheBoard } from '../../redux/boards/selectors';
-import { setEditingTask, setModalOpen } from '../../redux/boards/slice';
+import { useDraggable } from "@dnd-kit/core";
+import type { TaskType } from "../../types/types";
+import css from "./TaskCard.module.css";
+import { useAppDispatch, useAppSelector } from "../../hooks/redux";
+import Button from "../Button/Button";
+import { handleDeleteTask } from "../../utils/functions";
+import { selectTheBoard } from "../../redux/boards/selectors";
+import { setEditingTask, setModalOpen } from "../../redux/boards/slice";
 
 interface TaskCardProp {
-    task: TaskType;
+  task: TaskType;
 }
-const TaskCard = ({task}: TaskCardProp) => {
-  const board = useAppSelector(selectTheBoard)
-  const dispatch = useAppDispatch()
-    const { attributes, listeners, setNodeRef, transform} = useDraggable({
-        id: task._id || ""
-    })
+const TaskCard = ({ task }: TaskCardProp) => {
+  const board = useAppSelector(selectTheBoard);
+  const dispatch = useAppDispatch();
+  const { attributes, listeners, setNodeRef, transform } = useDraggable({
+    id: task._id || "",
+  });
 
-    const style = transform ? {
-        transform: `translate(${transform.x}px, ${transform.y}px)`
-    } : undefined;
+  const style = transform
+    ? {
+        transform: `translate(${transform.x}px, ${transform.y}px)`,
+      }
+    : undefined;
   return (
-    <div ref={setNodeRef}  style={style} className={css.wrap}>
+    <div ref={setNodeRef} style={style} className={css.wrap}>
       <div {...listeners} {...attributes}>
         <h3 className={css.title}>{task.title}</h3>
-      <p className={css.description}>{task.description}</p>
+        <p className={css.description}>{task.description}</p>
       </div>
       <div className={css.btnWrap}>
-        <Button onClick={() => handleDeleteTask(task._id, board?._id, dispatch)}>del</Button>
-      <Button onClick={() => {dispatch(setModalOpen("editTask")); console.log("taskCard", task); dispatch(setEditingTask(task))}}>
-            Edi
-          </Button>
+        <Button
+          onClick={() => handleDeleteTask(task._id, board?._id, dispatch)}
+        >
+          Delete
+        </Button>
+        <Button
+          onClick={() => {
+            dispatch(setModalOpen("editTask"));
+            console.log("taskCard", task);
+            dispatch(setEditingTask(task));
+          }}
+        >
+          Edit
+        </Button>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default TaskCard
+export default TaskCard;

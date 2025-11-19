@@ -1,0 +1,30 @@
+.selectBoardWrap {
+  margin: 1em 0;
+}
+
+.selectBoardWrap select {
+  padding: 0.5rem 1.5rem;
+  border: none;
+  border-radius: 0.4em;
+  background-color: var(--gray-light);
+  color: var(--gray-text);
+  outline: none;
+  cursor: pointer;
+}
+
+.selectBoardWrap select:focus {
+  border-color: var(--orange-bright);
+}
+
+.selectBoardWrap option {
+  font-size: 1em;
+  padding: 0.5em;
+}
+
+.select option:hover {
+  background: var(--orange-bright);
+}
+
+.select option:checked {
+  background: #e6e3ff;
+}

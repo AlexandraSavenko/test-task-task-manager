@@ -13,15 +13,20 @@
   
   .modal {
     background-color: #ffffff;
-    padding: 24px;
+    padding: 2.5rem 1.5rem;
     border-radius: 8px;
     max-width: 500px;
     width: 100%;
     position: relative;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
   }
+  .btnWrap{
+    position: absolute;
+  top: 8px;
+  right: 8px;
+  }
 
-  .closeButton {
+  /* .closeButton {
   position: absolute;
   top: 8px;
   right: 8px;
@@ -47,4 +52,4 @@
 
 .closeButton:focus {
   outline: 2px solid #007bff;
-}
+} */

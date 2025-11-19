@@ -1,12 +1,12 @@
 .wrap{
     cursor: grab;
     border-radius: 8px;
-    background-color: gray;
+    background-color: var(--gray-dark);
     padding: 4px;
 }
 
 .wrap:hover{
-    border: 1px solid black;
+    border: 1px solid var(--main-text);
 }
 
 .title{
@@ -15,4 +15,9 @@
 
 .description{
     margin-top: 2px;
+}
+
+.btnWrap{
+    padding: 4px;display: flex;
+    justify-content: space-between;
 }

@@ -38,7 +38,7 @@ const Board = ({ boardInfo }: BoardProps) => {
           </Button>
         </div>
 
-        <div className={css.wrap}>
+        <div className={css.wrap} style={{ "--column-count": boardInfo?.columns.length } as React.CSSProperties}>
           <DndContext collisionDetection={closestCorners} onDragEnd={handleDragEndWrapper}>
             {boardInfo?.columns.map((column) => (
               <Column

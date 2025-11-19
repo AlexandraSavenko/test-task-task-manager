@@ -1,6 +1,5 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import css from "./BoardForm.module.css";
-// import type { BoardFormType } from "../../types/types";
 import { initBoardSchema } from "../../schemas/board";
 import { MdDeleteForever } from "react-icons/md";
 import { MdOutlinePostAdd } from "react-icons/md";
@@ -32,7 +31,7 @@ const BoardForm = () => {
             <ErrorMessage name="name" component="span" />
           </div>
 
-          <div className={css.fieldmWrap}>
+          <div className={css.fieldWrap}>
             <label htmlFor="colunmName">Column name:</label>
             <Field
               id="columnName"

@@ -1,11 +1,10 @@
 .wrap{
     display: flex;
     flex-direction: column;
-    padding: 4px;
-    width: 200px;
-    height: 400px;
+    padding: 8px;
     border-radius: 8px;
-    border: 1px solid black;
+    border: 1px solid var(--gray-text);
+    color: var(--gray-text)
 }
 
 .title{

@@ -1,5 +1,6 @@
 import { createPortal } from "react-dom";
 import css from "./Modal.module.css";
+import Button from "../Button/Button";
 
 interface ModalProps {
   children: React.ReactNode;
@@ -20,13 +21,10 @@ const Modal = ({children, onClose }: ModalProps) => {
       aria-modal="true"
     >
       <div className={css.modal}>
-        <button
-          className={css.closeButton}
-          onClick={onClose}
-          aria-label="Close modal"
-        >
-          &times;
-        </button>
+<div className={css.btnWrap}>
+  <Button onClick={onClose}>X</Button>
+</div>
+        
         {children? children : "Sorry, something went wrong. Please, try again"} 
       </div>
     </div>,

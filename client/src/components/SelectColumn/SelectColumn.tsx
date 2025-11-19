@@ -9,7 +9,7 @@ interface SelectColumnsProps {
 const SelectColumn = ({ list, name }: SelectColumnsProps) => {
   if (!list) return <p>Sorry, no columns</p>;
   return list.length > 0 ? (
-    <div className={css.selectWrap}>
+    <div className={css.selectBoardWrap}>
       <Field as="select" name={name}>
         <option>choose status:</option>
         {list.map((el) => (

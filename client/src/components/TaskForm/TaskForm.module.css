@@ -1,0 +1,42 @@
+/* --- Form container --- */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  background: var(--main-background);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  max-width: 420px;
+  margin: 0 auto;
+  font-family: inherit;
+}
+
+/* --- Input field wrapper --- */
+.fieldWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.fieldWrap label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #333;
+}
+
+/* --- Inputs --- */
+.fieldWrap input,
+.fieldWrap textarea {
+  padding: 4px;
+  border: 1px solid #cccccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: 0.2s border-color;
+}
+
+.fieldWrap input:focus,
+.fieldmWrap input:focus {
+  outline: none;
+  border-color: var(--orange-bright);
+}

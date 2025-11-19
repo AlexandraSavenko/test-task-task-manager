@@ -1,10 +1,11 @@
-import { Field, Form, Formik } from "formik";
+import { ErrorMessage, Field, Form, Formik } from "formik";
 import css from "./EditBoardForm.module.css";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { selectTheBoard } from "../../redux/boards/selectors";
 import { convertBoardToFormValues, handleEditForm } from "../../utils/functions";
 import { boardFormInitValues } from "../../values/values";
 import Button from "../Button/Button";
+import { initBoardSchema } from "../../schemas/board";
 
 const EditBoardForm = () => {
   const dispatch = useAppDispatch();
@@ -18,14 +19,22 @@ const EditBoardForm = () => {
     <Formik
       initialValues={initialValues}
       enableReinitialize
+      validationSchema={initBoardSchema}
       onSubmit={(values, actions) => handleEditForm(values, actions, boardId, dispatch)}
     >
       {({ values }) => (
         <Form>
-          <Field type="text" name="name" id={boardToEdit?.name} />
+          <div className={css.fieldWrap}>
+            <label htmlFor="boardName">Name:</label>
+            <Field type="text" name="name" id="boardName" />
+             <ErrorMessage name="name" component="span" />
+            
+          </div>
+          
           {values.columns.map((col, index) => (
-            <div className={css.inputWrap} key={index}>
+            <div className={css.fieldWrap} key={index}>
               <Field name={`columns[${index}].title`} />
+              <ErrorMessage name={`columns[${index}].title`} component="span" />
             </div>
           ))}
           <Button type="submit">Save</Button>
