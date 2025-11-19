@@ -5,7 +5,6 @@ import createHttpError from 'http-errors';
 const validateBody = (schema: Joi.Schema) => {
   const func = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      console.log("validateBody", req.body)
       await schema.validateAsync(req.body, {
         abortEarly: false,
       });

@@ -9,6 +9,7 @@ import { initTaskSchema } from "../../schemas/task";
 import type { TaskType } from "../../types/types";
 import { createTask, editTask } from "../../redux/boards/operations";
 import { convertTaskToFormValues } from "../../utils/functions";
+import { setCodeError } from "../../redux/boards/slice";
 
 const TaskForm = ({formType}:{formType: string}) => {
     const theBoard = useAppSelector(selectTheBoard)
@@ -20,11 +21,10 @@ const TaskForm = ({formType}:{formType: string}) => {
     values: TaskType,
     actions: FormikHelpers<TaskType>
   ) => {
-    if(!theBoard) return;
-    console.log("Task form", editingTask)
-    
+    if(!theBoard){
+     dispatch(setCodeError("Board Id is missing in handleTaskFormSubmit"));
+      return;}    
     if(formType === "editTask"){
-      console.log("task form editTask")
       dispatch(editTask({editedTask: values, boardId: theBoard._id || "", taskId: editingTask?._id || ""}))
     return;
     }

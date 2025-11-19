@@ -61,8 +61,6 @@ export const handleSubmit = (
 ) => {
   const { currentColumnName, ...cleanValues } = values;
   dispatch(createBoard(cleanValues));
-  console.log("submit");
-  console.log(cleanValues, currentColumnName);
   actions.resetForm();
 };
 
@@ -72,7 +70,6 @@ export const handleEditForm = (
   boardId: string,
   dispatch: AppDispatch
 ) => {
-  console.log("handleEditBoard", values);
   dispatch(editBoard({ editedBoard: values, boardId }));
   actions.resetForm();
 };
@@ -90,7 +87,6 @@ export const handleDeleteTask = (
   boardId: string | undefined,
   dispatch: AppDispatch
 ) => {
-  console.log("delete task");
   if (!taskId || !boardId) return;
   dispatch(deleteTask({ taskId, boardId }));
 };

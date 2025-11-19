@@ -4,18 +4,21 @@ import Header from '../Header/Header';
 import { Suspense } from 'react';
 import Modal from '../modal/Modal';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { selectIsModalOpen } from '../../redux/boards/selectors';
+import { selectIsModalOpen, selectLoading } from '../../redux/boards/selectors';
 import { setModalOpen } from '../../redux/boards/slice';
 import BoardForm from '../BoardForm/BoardForm';
 import EditBoardForm from '../EditBoardForm/EditBoardForm';
 import TaskForm from '../TaskForm/TaskForm';
+import { createPortal } from 'react-dom';
+import Loader from '../loader/Loader';
 
 interface Props {
     children: React.ReactNode;
 }
 const Layout: React.FC<Props> = ({children}) => {
     const dispatch = useAppDispatch();
-  const isModalOpen = useAppSelector(selectIsModalOpen)
+  const isModalOpen = useAppSelector(selectIsModalOpen);
+  const loading = useAppSelector(selectLoading);
     const closeModal = () => dispatch(setModalOpen(""));
 
   return (
@@ -27,7 +30,9 @@ const Layout: React.FC<Props> = ({children}) => {
           {isModalOpen === "editBoard" && <EditBoardForm/>}
           {(isModalOpen === "createTask" || isModalOpen === "editTask") && <TaskForm formType={isModalOpen}/>}
         </Modal>
-      )}
+      )}{
+        loading && createPortal(<Loader/>, document.body)
+      }
       <Suspense fallback={null}>{children}</Suspense>
     </div>
   )

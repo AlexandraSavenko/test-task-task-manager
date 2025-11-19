@@ -19,7 +19,6 @@ const SelectBoard = () => {
         return;
     }
     dispatch(getTheBoard(boardId));
-    // dispatch(getAllTasks(boardId));
   };
   return (
     allBoards.length > 0 ? <div className={css.selectBoardWrap}>

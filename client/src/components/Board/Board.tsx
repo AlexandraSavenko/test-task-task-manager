@@ -17,7 +17,7 @@ const Board = ({ boardInfo }: BoardProps) => {
   const dispatch = useAppDispatch();
   const handleDragEndWrapper = (event: DragEndEvent) => {
     if (!boardInfo._id) {
-      dispatch(setCodeError(false));
+      dispatch(setCodeError("Board Id is missing in handleDragEndWrapper"));
       return;
     }
     handleDragEnd(event, boardInfo._id, dispatch);

@@ -27,7 +27,7 @@ export interface BoardsInitStateTypes {
     tasks: TaskType[],
     editingTask: TaskType | null,
     isModalOpen: string;
-    loading: boolean,
-    error: boolean
+    loading: boolean;
+    error: string | null;
 }
 
