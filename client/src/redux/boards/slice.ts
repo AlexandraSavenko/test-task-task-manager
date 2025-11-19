@@ -60,9 +60,11 @@ export const slice = createSlice({
       })
       .addCase(createBoard.fulfilled, (state, action) => {
         state.loading = false;
-        const newBoard = action.payload.data;
-        state.board = newBoard;
-        state.allBoards = [...state.allBoards];
+        const name = action.payload.name;
+        const _id = action.payload._id
+        state.board = action.payload;
+        console.log(name)
+        state.allBoards = [...state.allBoards, {name, _id}];
         state.isModalOpen = ""
       })
       .addCase(createBoard.rejected, (state) => {

@@ -2,7 +2,7 @@ import { Schema, model } from "mongoose";
 
 const columnSchema = new Schema({
   title: { type: String, required: true },
-  index: {type: String, required: true}
+  // index: {type: String, required: true}
 });
 const boardSchema = new Schema(
   {

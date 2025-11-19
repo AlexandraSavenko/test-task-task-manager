@@ -23,8 +23,7 @@ export const createBoard = createAsyncThunk(
   "boards/createBoard",
   async (newBoard: BoardType) => {
     const res = await api.post("/boards", newBoard);
-    console.log(res);
-    return res.data;
+    return res.data.data;
   }
 );
 
