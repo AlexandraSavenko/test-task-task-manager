@@ -46,7 +46,8 @@ export const updateTaskController = async (req: Request, res: Response) => {
 
 export const patchTaskController = async (req: Request, res: Response) => {
 const taskId = req.params.taskId;
-const updatedData = req.body;
+const updatedData = req.body.update;
+console.log("patch Task", req.body)
 const updatedTaskField = await TasksServises.updateTaskPartial(taskId, updatedData)
 res.status(200).json({
   status: 200,
