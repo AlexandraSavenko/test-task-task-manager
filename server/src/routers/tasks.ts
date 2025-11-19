@@ -9,5 +9,6 @@ const tasksRouter = Router({mergeParams: true})
 tasksRouter.post("/", validateBody(taskAddSchema), ctrlWrapper(tasksControllers.addTaskController))
 tasksRouter.get("/", ctrlWrapper(tasksControllers.getTasksController))
 tasksRouter.put("/:taskId", isValidId("taskId"), ctrlWrapper(tasksControllers.updateTaskController))
+tasksRouter.patch("/:taskId", isValidId("taskId"), ctrlWrapper(tasksControllers.patchTaskController))
 tasksRouter.delete("/:taskId", isValidId("taskId"), tasksControllers.deleteTaskController)
 export default tasksRouter;

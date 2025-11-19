@@ -9,6 +9,7 @@ import {
   editTask,
   getAllBoards,
   getTheBoard,
+  patchTaskStatus,
 } from "./operations";
 
 const boardsInitState: BoardsInitStateTypes = {
@@ -32,6 +33,9 @@ export const slice = createSlice({
     },
     setEditingTask(state, action) {
       state.editingTask = action.payload
+    },
+    setCodeError(state, action){
+      state.error = action.payload
     }
   },
   extraReducers: (builder) => {
@@ -85,12 +89,6 @@ export const slice = createSlice({
         state.board = null;
         state.tasks = [];
       })
-      // .addCase(getAllTasks.pending, (state) => {
-      //   state.loading = true;
-      // }).addCase(getAllTasks.fulfilled, (state, action) => {
-      //   state.loading = false;
-      //   state.tasks = [action.payload]
-      // })
       .addCase(createTask.pending, (state) => {
         state.loading = true;
       })
@@ -106,6 +104,13 @@ export const slice = createSlice({
         state.tasks = state.tasks.map(el => el._id === action.payload._id ? action.payload : el);
         state.isModalOpen = ""
       })
+      .addCase(patchTaskStatus.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(patchTaskStatus.fulfilled, (state, action) => {
+        state.loading = false;
+        state.tasks = state.tasks.map(el => el._id === action.payload._id ? action.payload : el);
+      })
       .addCase(deleteTask.pending, (state) => {
         state.loading = true;
       })
@@ -118,4 +123,4 @@ export const slice = createSlice({
 
 export default slice.reducer;
 
-export const { selectNoBoard, setModalOpen, setEditingTask } = slice.actions;
+export const { selectNoBoard, setModalOpen, setEditingTask, setCodeError } = slice.actions;

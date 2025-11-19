@@ -1,5 +1,5 @@
 import TaskCollection from "../db/models/Tasks";
-import { createTaskPayload, UpdateTaskParams } from "../types/tasks";
+import { createTaskPayload, PatchTaskPayload, UpdateTaskParams } from "../types/tasks";
 
 export const getTasks = async (boardId: string) =>
   TaskCollection.find({ boardId });
@@ -33,5 +33,13 @@ export const updateTask = async ({
   };
 };
 
+export const updateTaskPartial = async (taskId: string, updateData: PatchTaskPayload) => {
+  const updatedTask = await TaskCollection.findByIdAndUpdate(
+    taskId,
+    updateData,
+    {new: true, runValidators: true}
+  );
+  return updatedTask;
+}
 export const deleteTask = (taskId: string) =>
   TaskCollection.findOneAndDelete({ _id: taskId });

@@ -21,13 +21,17 @@ const TaskCard = ({task}: TaskCardProp) => {
         transform: `translate(${transform.x}px, ${transform.y}px)`
     } : undefined;
   return (
-    <div ref={setNodeRef} {...listeners} {...attributes} style={style} className={css.wrap}>
-      <h3 className={css.title}>{task.title}</h3>
+    <div ref={setNodeRef}  style={style} className={css.wrap}>
+      <div {...listeners} {...attributes}>
+        <h3 className={css.title}>{task.title}</h3>
       <p className={css.description}>{task.description}</p>
-      <Button onClick={() => handleDeleteTask(task._id, board?._id, dispatch)}>del</Button>
+      </div>
+      <div className={css.btnWrap}>
+        <Button onClick={() => handleDeleteTask(task._id, board?._id, dispatch)}>del</Button>
       <Button onClick={() => {dispatch(setModalOpen("editTask")); console.log("taskCard", task); dispatch(setEditingTask(task))}}>
             Edi
           </Button>
+      </div>
     </div>
   )
 }

@@ -9,3 +9,9 @@ export interface UpdateTaskParams {
     payload: createTaskPayload;
     options: {}
 }
+
+export interface PatchTaskPayload {
+    status?: string;
+    title?: string;
+    description?: string;
+}

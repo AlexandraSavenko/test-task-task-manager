@@ -57,17 +57,47 @@ export const createTask = createAsyncThunk(
   }
 );
 
-
 export const deleteTask = createAsyncThunk(
-  "boards/deleteTask", async ({boardId, taskId}: {boardId: string; taskId: string}) => {
-    const res = await api.delete(`/boards/${boardId}/tasks/${taskId}`)
+  "boards/deleteTask",
+  async ({ boardId, taskId }: { boardId: string; taskId: string }) => {
+    const res = await api.delete(`/boards/${boardId}/tasks/${taskId}`);
     return res.data.data;
   }
-)
+);
 
 export const editTask = createAsyncThunk(
-  "boards/editTask", async ({boardId, taskId, editedTask}: {boardId: string; taskId: string; editedTask: TaskType}) => {
-    const res = await api.put(`/boards/${boardId}/tasks/${taskId}`, {...editedTask, boardId});
+  "boards/editTask",
+  async ({
+    boardId,
+    taskId,
+    editedTask,
+  }: {
+    boardId: string;
+    taskId: string;
+    editedTask: TaskType;
+  }) => {
+    const res = await api.put(`/boards/${boardId}/tasks/${taskId}`, {
+      ...editedTask,
+      boardId,
+    });
     return res.data.data;
   }
-)
+);
+
+export const patchTaskStatus = createAsyncThunk(
+  "boards/patchTask",
+  async ({
+    boardId,
+    taskId,
+    update,
+  }: {
+    boardId: string;
+    taskId: string;
+    update: {status: string};
+  }) => {
+    const res = await api.patch(`/boards/${boardId}/tasks/${taskId}`, {
+      update
+    })
+    return res.data.data;
+  }
+);

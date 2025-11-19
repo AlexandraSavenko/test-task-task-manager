@@ -11,12 +11,12 @@ tasks: TaskType[]
 const Column = ({column, tasks}: ColumnProp) => {
   useEffect(() => {console.log(tasks)}, [tasks])
     const {setNodeRef} = useDroppable({
-        id: column.index || "",
+        id: column._id || "",
     })
   return (
-    <div className={css.wrap}>
+    <div ref={setNodeRef} className={css.wrap}>
       <h2 className={css.title}>{column.title}</h2>
-      <div ref={setNodeRef} className={css.taskWrap}>{
+      <div className={css.taskWrap}>{
         tasks.map(task => <TaskCard key={task._id} task={task}/>)
         }</div>
     </div>

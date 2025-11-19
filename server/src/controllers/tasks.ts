@@ -43,6 +43,19 @@ export const updateTaskController = async (req: Request, res: Response) => {
     data: result?.data,
   });
 };
+
+export const patchTaskController = async (req: Request, res: Response) => {
+const taskId = req.params.taskId;
+const updatedData = req.body;
+const updatedTaskField = await TasksServises.updateTaskPartial(taskId, updatedData)
+res.status(200).json({
+  status: 200,
+  message: `task ${taskId} got new status ${updatedTaskField?.status}`,
+  data: updatedTaskField
+})
+
+
+} 
 export const deleteTaskController = async (req: Request, res: Response) => {
   const { taskId } = req.params;
   console.log("deleteTaskController", req.params);
