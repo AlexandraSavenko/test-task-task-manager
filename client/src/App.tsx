@@ -1,14 +1,24 @@
-import { Suspense } from "react";
+import { Suspense, useEffect } from "react";
 import "./App.css";
 import Layout from "./components/Layout/Layout";
 import { Route, Routes } from "react-router-dom";
 import BoardPage from "./pages/boardPage/BoardPage";
-// import Modal from "./components/modal/Modal";
+import toast, { Toaster } from "react-hot-toast";
+import { useAppSelector } from "./hooks/redux";
+import { selectError } from "./redux/boards/selectors";
 
 
 
 function App() {
-  return <Layout>{
+  const error = useAppSelector(selectError);
+  useEffect(()=>{
+    if(error){
+      toast.error(error)
+    }
+  },[error])
+  return <> 
+  <Toaster position="top-center"/>
+  <Layout>{
     <Suspense>
       <Routes>
         <Route path="/" element={<BoardPage/>}/>
@@ -16,6 +26,7 @@ function App() {
     </Suspense>
     }
   </Layout>;
+  </>
 }
 
 export default App;

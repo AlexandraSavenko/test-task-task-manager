@@ -94,11 +94,9 @@ export const patchTaskStatus = createAsyncThunk(
     taskId: string;
     update: {status: string};
   }) => {
-    console.log("new status", update)
     const res = await api.patch(`/boards/${boardId}/tasks/${taskId}`, {
       update
     })
-    console.log(res.data.data)
     return res.data.data;
   }
 );

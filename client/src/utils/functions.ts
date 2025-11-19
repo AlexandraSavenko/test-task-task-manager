@@ -100,8 +100,6 @@ export const handleDragEnd = (
 ) => {
   const { active, over } = event;
   if (!over) return;
-  console.log("active", active);
-  console.log("over", over);
   const taskId = active.id as string;
   const newStatus = over.id as string;
   dispatch(patchTaskStatus({ boardId, taskId, update: { status: newStatus } }));

@@ -22,7 +22,7 @@ const TaskForm = ({formType}:{formType: string}) => {
     actions: FormikHelpers<TaskType>
   ) => {
     if(!theBoard){
-     dispatch(setCodeError("Board Id is missing in handleTaskFormSubmit"));
+     dispatch(setCodeError("Board Id is missing"));
       return;}    
     if(formType === "editTask"){
       dispatch(editTask({editedTask: values, boardId: theBoard._id || "", taskId: editingTask?._id || ""}))
