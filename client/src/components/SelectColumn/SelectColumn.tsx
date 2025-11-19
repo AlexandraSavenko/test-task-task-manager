@@ -13,7 +13,7 @@ const SelectColumn = ({ list, name }: SelectColumnsProps) => {
       <Field as="select" name={name}>
         <option>choose status:</option>
         {list.map((el) => (
-          <option key={el._id} value={el.index}>
+          <option key={el._id} value={el._id}>
             {el.title}
           </option>
         ))}

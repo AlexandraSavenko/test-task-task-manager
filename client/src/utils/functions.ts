@@ -7,6 +7,7 @@ import {
   deleteTheBoard,
   editBoard,
 } from "../redux/boards/operations";
+import type { DragEndEvent } from "@dnd-kit/core";
 
 export const handleAddColumn = (
   values: BoardFormType,
@@ -38,6 +39,7 @@ export const convertBoardToFormValues = (board: BoardType) => ({
   name: board.name,
   columns: board.columns.map((col) => ({
     title: col.title,
+    _id: col._id
   })),
 });
 
@@ -64,6 +66,7 @@ export const handleEditForm = (
   boardId: string,
   dispatch: AppDispatch
 ) => {
+  console.log("handleEditBoard", values)
   dispatch(editBoard({ editedBoard: values, boardId }));
   actions.resetForm();
 };
@@ -82,24 +85,25 @@ export const handleDeleteTask = (
   boardId: string | undefined,
   dispatch: AppDispatch
 ) => {
+  console.log("delete task")
   if(!taskId || !boardId) return;
   dispatch(deleteTask({taskId, boardId}))
 }
 // export const handleEditBoard = (dispatch: AppDispatch) => {
 //   dispatch(setModalOpen("editBoard"))
 // }
-// export const handleDragEnd = (event: DragEndEvent) => {
-//   const { active, over } = event;
-//   if (!over) return;
-//   console.log("active", active);
-//   console.log("over", over);
+export const handleDragEnd = (event: DragEndEvent) => {
+  const { active, over } = event;
+  if (!over) return;
+  console.log("active", active);
+  console.log("over", over);
 
-//   const taskId = active.id as string;
-//   const NewStatus = over.id as TaskType["status"];
+  const taskId = active.id as string;
+  const NewStatus = over.id as TaskType["status"];
 
-//   setTasks(() =>
-//     tasks.map((task) =>
-//       task.id === taskId ? { ...task, status: NewStatus } : task
-//     )
-//   );
-// };
+  setTasks(() =>
+    tasks.map((task) =>
+      task.id === taskId ? { ...task, status: NewStatus } : task
+    )
+  );
+};

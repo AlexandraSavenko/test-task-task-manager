@@ -70,6 +70,7 @@ export const slice = createSlice({
       })
       .addCase(editBoard.fulfilled, (state, action) => {
         state.loading = false;
+        // console.log(action.payload)
         state.board = action.payload;
         state.isModalOpen = ""
       })
