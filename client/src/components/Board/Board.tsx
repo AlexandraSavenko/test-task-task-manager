@@ -27,7 +27,8 @@ const Board = ({ boardInfo }: BoardProps) => {
       <div>
         <div className={css.boardMenu}>
           <p className={css.boardName}>{boardInfo.name}</p>
-          <Button onClick={() => handleDeleteBoard(boardInfo._id, dispatch)}>
+          <div className={css.boardMenuBtns}>
+             <Button onClick={() => handleDeleteBoard(boardInfo._id, dispatch)}>
             Delete Board
           </Button>
           <Button onClick={() => dispatch(setModalOpen("editBoard"))}>
@@ -36,6 +37,8 @@ const Board = ({ boardInfo }: BoardProps) => {
           <Button onClick={() => dispatch(setModalOpen("createTask"))}>
             Add Task
           </Button>
+          </div>
+         
         </div>
 
         <div className={css.wrap} style={{ "--column-count": boardInfo?.columns.length } as React.CSSProperties}>

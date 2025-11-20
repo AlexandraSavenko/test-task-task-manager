@@ -1,0 +1,43 @@
+.noBoardWrap {
+  margin: 2rem auto;
+  padding: 2rem 1.5rem;
+  max-width: 420px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  background: var(--main-background);
+  border: 1px solid var(--gray-light);
+  border-radius: 16px;
+
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+
+  text-align: center;
+  gap: 1.2rem;
+
+  transition: transform 0.3s ease;
+}
+
+.noBoardWrap:hover {
+  transform: translateY(-2px);
+}
+
+.noBoardWrap p {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.icon {
+  width: 110px;
+  height: 110px;
+  fill: var(--gray-dark);
+  opacity: 0.85;
+  transition: opacity 0.3s ease;
+}
+
+.noBoardWrap:hover .icon {
+  opacity: 1;
+}

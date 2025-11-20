@@ -16,18 +16,22 @@
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 .boardName{
-  color: var(--gray-text);
-}
-.boardMenu p {
+  color: var(--gray-text);  
   font-weight: 600;
   margin: 0;
   font-size: 1.2em;
 }
-
-.boardMenu button {
-  margin-left: 0.5em;
+.boardMenuBtns {
+display: flex;
+flex-wrap: wrap;
+gap: 0.5rem;
 }
 
+@media screen and (max-width: 450px) {
+  .boardMenuBtns{
+flex-direction: column;
+  }
+}
 /* Columns wrapper */
 .wrap {
  display: grid;
