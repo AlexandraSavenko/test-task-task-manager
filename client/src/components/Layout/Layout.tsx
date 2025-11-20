@@ -1,7 +1,7 @@
 import type React from 'react'
 import css from './Layout.module.css'
 import Header from '../Header/Header';
-import { Suspense, useEffect } from 'react';
+import { Suspense } from 'react';
 import Modal from '../modal/Modal';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { selectIsModalOpen, selectLoading } from '../../redux/boards/selectors';
