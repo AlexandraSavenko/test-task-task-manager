@@ -3,15 +3,23 @@ import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { getAllBoards, getTheBoard } from "../../redux/boards/operations";
 import { selectAllBoards } from "../../redux/boards/selectors";
 import css from "./SelectBoard.module.css";
-import { selectNoBoard } from "../../redux/boards/slice";
+import { selectNoBoard, setCodeError } from "../../redux/boards/slice";
 
-const SelectBoard = () => {
+interface SelectBoardProps {
+  onClose: () => void;
+}
+const SelectBoard = ({onClose}: SelectBoardProps) => {
   const dispatch = useAppDispatch();
   const allBoards = useAppSelector(selectAllBoards);
   useEffect(() => {
-    dispatch(getAllBoards())
-    
+    dispatch(getAllBoards())  
   }, [])
+  useEffect(()=>{
+    if(!allBoards){
+    dispatch(setCodeError("Back is asleep. Please reload to wake it up."))
+  }
+  },[allBoards, dispatch])
+  
   const handleChangeBoard = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const boardId = event.target.value;
     if(boardId === "noBoard"){
@@ -19,6 +27,7 @@ const SelectBoard = () => {
         return;
     }
     dispatch(getTheBoard(boardId));
+    onClose()
   };
   return (
     allBoards.length > 0 ? <div className={css.selectBoardWrap}>

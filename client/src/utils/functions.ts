@@ -59,7 +59,10 @@ export const handleSubmit = (
   actions: FormikHelpers<BoardFormType>,
   dispatch: AppDispatch
 ) => {
-  const { currentColumnName, ...cleanValues } = values;
+  const cleanValues = {
+    name: values.name,
+    columns: values.columns
+  }
   dispatch(createBoard(cleanValues));
   actions.resetForm();
 };

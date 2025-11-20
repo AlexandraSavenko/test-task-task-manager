@@ -31,7 +31,7 @@ const EditBoardForm = () => {
             
           </div>
           
-          {values.columns.map((col, index) => (
+          {values.columns.map((_, index) => (
             <div className={css.fieldWrap} key={index}>
               <Field name={`columns[${index}].title`} />
               <ErrorMessage name={`columns[${index}].title`} component="span" />

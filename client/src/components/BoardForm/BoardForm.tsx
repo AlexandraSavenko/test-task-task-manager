@@ -33,7 +33,8 @@ const BoardForm = () => {
 
           <div className={css.fieldWrap}>
             <label htmlFor="colunmName">Column name:</label>
-            <Field
+            <div className={css.columnCreateWrap}>
+              <Field
               id="columnName"
               name="currentColumnName"
               placeholder="My column is called..."
@@ -41,6 +42,8 @@ const BoardForm = () => {
             <Button onClick={() => handleAddColumn(values, setFieldValue)}>
               <MdOutlinePostAdd />
             </Button>
+            </div>
+            
             <ErrorMessage name="columns" component="span" />
           </div>
           <div className={css.listOfColumns}>
