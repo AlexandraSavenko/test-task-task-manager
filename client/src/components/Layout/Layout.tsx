@@ -20,7 +20,6 @@ const Layout: React.FC<Props> = ({children}) => {
   const isModalOpen = useAppSelector(selectIsModalOpen);
   const loading = useAppSelector(selectLoading);
     const closeModal = () => dispatch(setModalOpen(""));
-useEffect(() => {console.log(loading)}, [loading])
   return (
     <div className={css.layoutWrap}>
       <Header/>
