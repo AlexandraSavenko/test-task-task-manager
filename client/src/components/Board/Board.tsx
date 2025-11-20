@@ -26,7 +26,7 @@ const Board = ({ boardInfo }: BoardProps) => {
     <div className={css.taskMan}>
       <div>
         <div className={css.boardMenu}>
-          <p>{boardInfo.name}</p>
+          <p className={css.boardName}>{boardInfo.name}</p>
           <Button onClick={() => handleDeleteBoard(boardInfo._id, dispatch)}>
             Delete Board
           </Button>

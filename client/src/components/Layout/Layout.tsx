@@ -1,7 +1,7 @@
 import type React from 'react'
 import css from './Layout.module.css'
 import Header from '../Header/Header';
-import { Suspense } from 'react';
+import { Suspense, useEffect } from 'react';
 import Modal from '../modal/Modal';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { selectIsModalOpen, selectLoading } from '../../redux/boards/selectors';
@@ -20,7 +20,7 @@ const Layout: React.FC<Props> = ({children}) => {
   const isModalOpen = useAppSelector(selectIsModalOpen);
   const loading = useAppSelector(selectLoading);
     const closeModal = () => dispatch(setModalOpen(""));
-
+useEffect(() => {console.log(loading)}, [loading])
   return (
     <div className={css.layoutWrap}>
       <Header/>
